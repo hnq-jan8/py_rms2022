@@ -3,7 +3,6 @@ class Order:
         self.__table_id = table_id
         self.__cart = cart  # list of {dish_name: quantity}
 
-
     def get_table_id(self):
         return self.__table_id
 

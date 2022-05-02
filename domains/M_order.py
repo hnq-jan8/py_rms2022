@@ -20,14 +20,6 @@ def print_menu(dish_list, table):
         print(str(i+1) + '.', d)    # print the menu
     print('\n                ** ** **\n')
 
-def total_price(cart, dish_list):
-    total = 0
-    # from keys of the cart, get the dish(object) from the dish_list
-    for dish in dish_list:
-        if dish.get_name() in cart:
-            total += dish.get_price() * cart[dish.get_name()]
-    return total
-
 def order_modify(dish, cart, table_id):
     while True:    # while there are dishes in the menu
         clr_scr()
