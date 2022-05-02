@@ -1,5 +1,4 @@
-import os
-from input import read_bill
+from input import read_bill, clr_scr
 from domains.Bill import Bill
 
 class Bill_Manager:
@@ -29,7 +28,7 @@ class Bill_Manager:
     def start(self):
         while True:
             # self.clear_bills()    # only used for debugging
-            os.system('clear')
+            clr_scr()
             print('\n--------------------------------------- Admin / Bills ----------------------------------------\n')
             self.list_bills()
             print(f'\n----------------------------------------------------------------------------------------------\n')
@@ -43,7 +42,7 @@ class Bill_Manager:
             if choice == '0':
                 return
             elif choice.isdigit() and int(choice) <= len(self.__bills):
-                os.system('clear')
+                clr_scr()
                 print(f'''\n--------------------------------------- Admin / Bills ----------------------------------------\n
                         \r     ID\t\tTime\t\t\t   Total (VND)
                         \r-> {self.__bills[int(choice) - 1]}''')

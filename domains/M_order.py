@@ -1,7 +1,6 @@
-import os
-from input import write_bill
-from domains.Order import Order
 from domains.M_bill import *
+from domains.Order import Order
+from input import write_bill, clr_scr
 
 def print_cart(table, cart):
     print(f'''\n---------- Ordering for table {table} ----------\n
@@ -31,7 +30,7 @@ def total_price(cart, dish_list):
 
 def order_modify(dish, cart, table_id):
     while True:    # while there are dishes in the menu
-        os.system('clear')
+        clr_scr()
         print_cart(table_id, cart)
         print('''\na.\t\t | ADD |\n''')
         if len(cart) == 0:
@@ -43,7 +42,7 @@ def order_modify(dish, cart, table_id):
         if choice == '0': return 0      # return 0 if user cancels the ordering process
         elif choice == 'a':   # choose a dish from menu to cart
             while True:
-                os.system('clear')
+                clr_scr()
                 print_menu(dish, table_id)
                 select_dish = input(f'''0. <- Back
                                     \r\nAdd (1-{len(dish)}, 0): ''').strip()
@@ -59,7 +58,7 @@ def order_modify(dish, cart, table_id):
         elif choice.isdigit() and int(choice) <= len(cart):   # choose a dish from the cart
             chosen_item = list(cart.keys())[int(choice)-1]  # get the dish(object) from the cart
             while True:
-                os.system('clear')
+                clr_scr()
                 print(f'''\n---------- Ordering for table {table_id} ----------\n
                         \rCart:
                         \r-> {chosen_item:25}  (+) {cart[chosen_item]} (-)
@@ -100,12 +99,12 @@ class Order_Manager:
         cart = order.get_cart()     # load the previous cart
         dishes = dish_manager.get_dishes()
         while True:
-            os.system('clear')
+            clr_scr()
             print_cart(order.get_table_id(), cart)
             print('\nDo you want to export bill now?')
             confirm = input('Type \'y\' to confirm: ').strip().lower()
             if confirm == 'y':
-                os.system('clear')
+                clr_scr()
                 num_bills = len(bill_manager.get_bills())   # used to generate the bill id
                 prices = []     # list of prices of the dishes in the cart
                 for dish in dishes:

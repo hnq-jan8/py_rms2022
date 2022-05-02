@@ -1,5 +1,4 @@
-import os
-from input import *
+from input import read_data, write_data, input_name_employee, clr_scr
 from domains.Employee import Employee
 
 class Employee_Manager:
@@ -44,7 +43,7 @@ class Employee_Manager:
         return self.shifts[shift]       # Convert from key (123) to its value
 
     def add_employee(self):
-        os.system('clear')
+        clr_scr()
         print('''\n---------------------------------- Admin / Employee Manager ----------------------------------\n
                 \rAdding an employee''')
         fst, lst = input_name_employee()
@@ -60,7 +59,7 @@ class Employee_Manager:
 
     def edit_employee(self, employee):
         while True:
-            os.system('clear')
+            clr_scr()
             print('\n---------------------------------- Admin / E_Manager / Edit ----------------------------------\n')
             print(f'''   Name\t\t\t     ID\t\t     Address\t     Role\t\t Salary  Shift
                     \r-> {employee}\n
@@ -103,7 +102,7 @@ class Employee_Manager:
 
     def select_employee(self, employee):
         while True:
-            os.system('clear')
+            clr_scr()
             print(f'''\n---------------------------------- Admin / Employee Manager ----------------------------------\n
                     \r   Name\t\t\t     ID\t\t     Address\t     Role\t\t Salary  Shift
                     \r-> {employee}\n
@@ -140,7 +139,7 @@ class Employee_Manager:
         self.refresh_ids()  # Refresh the list of IDs
         while True:
             write_data('employees', self.__employees, self.ids)
-            os.system('clear')
+            clr_scr()
             print('\n---------------------------------- Admin / Employee Manager ----------------------------------\n')
             self.list_employees()
             print(f'''\n----------------------------------------------------------------------------------------------

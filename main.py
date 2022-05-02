@@ -1,4 +1,5 @@
 import os
+from input import compress_data, decompress_data, print_tables, print_admin_action
 from domains.Table import *
 from domains.M_order import *
 from domains.M_dish import *
@@ -27,7 +28,7 @@ if __name__ == '__main__':
             print(f'(!) Error: {e}')
 
     while True:
-        os.system('clear')
+        clr_scr()
         password = input('\nEnter password (type \'0\' to save and exit): ')
         while password != 'admin' and password != 'staff':
             if password == '0':  # Type '0' to save data and exit
@@ -37,13 +38,13 @@ if __name__ == '__main__':
                 os.remove('bills.txt')
                 print('Data saved.')
                 exit()
-            os.system('clear')
+            clr_scr()
             print('(!) Wrong password')
             password = input('Enter password (type \'0\' to save and exit): ')
         if password == 'admin':
             # Administrator section: food menu, employees, and bills
             while True:
-                os.system('clear')
+                clr_scr()
                 print_admin_action()
                 choice = input('\nChoice (1230): ')
                 if choice == '0':
@@ -59,7 +60,7 @@ if __name__ == '__main__':
             # Staff section: ordering and billing
             while True:
                 orders = o_manager.get_orders()
-                os.system('clear')
+                clr_scr()
                 print_tables(table_list)
                 choice = input('\nChoice (1-9, 0): ').strip()
                 if choice.isdigit() and int(choice) in range(1, 10):    # select table

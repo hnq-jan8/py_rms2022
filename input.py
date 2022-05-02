@@ -1,5 +1,9 @@
+import os
 import pickle
 import zipfile
+
+def clr_scr():
+    os.system('clear')
 
 def input_name_employee():  # used for employee, do name validating
     while True:

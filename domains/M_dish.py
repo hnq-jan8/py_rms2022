@@ -1,5 +1,4 @@
-import os
-from input import *
+from input import read_data, write_data, input_name_dish, clr_scr
 from domains.Dish import Dish
 
 class Dish_Manager:
@@ -24,7 +23,7 @@ class Dish_Manager:
         self.__dishes, self.names = read_data('dishes')
 
     def add_dish(self):
-        os.system('clear')
+        clr_scr()
         print('''\n----- Admin / Dishes Manager ------\n
                 \rAdding a dish''')
         name = input_name_dish(self.names)
@@ -38,7 +37,7 @@ class Dish_Manager:
 
     def edit_dish(self, dish):
         while True:
-            os.system('clear')
+            clr_scr()
             print('\n-------- Admin / D_Manager / Edit ---------\n')
             print(f'''   Name\t\t\t\tPrice (VND)
                     \r-> {dish}\n
@@ -75,7 +74,7 @@ class Dish_Manager:
 
     def select_dish(self, dish):
         while True:
-            os.system('clear')
+            clr_scr()
             print(f'''\n--------- Admin / Dishes Manager ----------\n
                     \r   Name\t\t\t\tPrice (VND)
                     \r-> {dish}\n
@@ -105,7 +104,7 @@ class Dish_Manager:
         self.refresh_name()    # Solve the problem of the name conflict
         while True:
             write_data('dishes', self.__dishes, self.names)
-            os.system('clear')
+            clr_scr()
             print('\n--------- Admin / Dishes Manager ----------\n')
             self.list_dishes()
             print(f'''\n-------------------------------------------
