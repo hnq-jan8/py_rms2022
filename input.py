@@ -3,7 +3,7 @@ import pickle
 import zipfile
 
 def clr_scr():
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def input_name_employee():  # used for employee, do name validating
     while True:
@@ -43,7 +43,7 @@ def print_tables(t):
             \r\n----------------------------------\n
             \r0. <- Back''')
 
-def write_data(str, list0, list1):      # str: 'dishes', 'employees', 'bills'
+def write_data(str, list0, list1):      # str: 'dishes', 'employees'
     with open(f'{str}.txt', 'wb') as f:
         pickle.dump(list0, f)
         pickle.dump(list1, f)
