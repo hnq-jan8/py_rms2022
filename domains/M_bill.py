@@ -34,11 +34,11 @@ class Bill_Manager:
             print(f'\n----------------------------------------------------------------------------------------------\n')
             if len(self.__bills) == 0:
                 print('0. <- Back')
-                choice = input('\nChoice (0): ').strip().lower()
+                choice = input('\nChoice (0): ').strip()
             else:
                 print(f'''Select a bill to view more details
                         \r\n0. <- Back''')
-                choice = input(f'\nChoice (0): ').strip()
+                choice = input(f'\nChoice (1-{len(self.__bills)}, 0): ').strip()
             if choice == '0':
                 return
             elif choice.isdigit() and int(choice) <= len(self.__bills):
