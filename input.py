@@ -82,3 +82,8 @@ def compress_data():
 def decompress_data():
     with zipfile.ZipFile(f'res_data.zip', 'r') as f:
         f.extractall()
+
+def clean_up():
+    os.remove('dishes.txt')
+    os.remove('employees.txt')
+    os.remove('bills.txt')

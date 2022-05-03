@@ -1,6 +1,7 @@
+from domains.Table import *
 from domains.M_bill import *
 from domains.Order import Order
-from input import write_bill, clr_scr
+from input import write_bill, print_tables, clr_scr
 
 def print_cart(table, cart):
     print(f'''\n---------- Ordering for Table {table} ----------\n
@@ -29,8 +30,8 @@ def order_modify(dish, cart, table_id):
             print('0. <- Cancel')
             choice = input('\nChoice (a, 0): ').strip().lower()
         else:
-            print('0. <- Cancel\t    |\t     s. -> Submit')
-            choice = input(f'\nChoice (a, 1-{len(cart)}, 0): ').strip().lower()
+            print('0. <- Cancel\t    |\t      s. -> Submit')
+            choice = input(f'\nChoice (a, 1-{len(cart)}, s, 0): ').strip().lower()
         if choice == '0': return 0      # return 0 if user cancels the ordering process
         elif choice == 'a':   # choose a dish from menu to cart
             while True:
@@ -55,8 +56,8 @@ def order_modify(dish, cart, table_id):
                         \rCart:
                         \r  ->  {chosen_item:25}(+) {cart[chosen_item]} (-)
                         \r\n------------------------------------------\n
-                        \r0. <- Back''')
-                choice = input(f'''\nChoice (+, -, 0): ''').strip()
+                        \r0. <- Back                    r. -> Remove''')
+                choice = input(f'''\nChoice (+, -, r, 0): ''').strip()
                 if choice == '0': break
                 elif choice == '+': cart[chosen_item] += 1
                 elif choice == '-': 
@@ -64,6 +65,9 @@ def order_modify(dish, cart, table_id):
                     if cart[chosen_item] == 0:
                         del cart[chosen_item]       # delete the dish from the cart
                         break
+                elif choice == 'r':
+                    del cart[chosen_item]
+                    break
         elif choice == 's':             # submit the order
             if len(cart) == 0:
                 continue
@@ -72,6 +76,9 @@ def order_modify(dish, cart, table_id):
 class Order_Manager:
     def __init__(self):
         self.__orders = []
+        self.table_list = []    # list of tables
+        for _ in range(0, 9):   # create 9 tables (edit number of tables here)
+            self.table_list.append(Table())
 
     def get_orders(self):
         return self.__orders
@@ -101,7 +108,7 @@ class Order_Manager:
                 if dish.get_name() in cart:
                     prices.append(dish.get_price())
             bill = Bill(num_bills, order.get_table_id(), cart, prices)
-            print(f'\n        >>>   Bill created   <<<')
+            print(f'\n        >>>   Bill Created   <<<')
             bill_manager.add_bill(bill)
             bill.details()
             write_bill(bill_manager.get_bills())
@@ -114,3 +121,27 @@ class Order_Manager:
         if tem_cart == 0: return order
         order.set_cart(tem_cart)
         return order
+
+    def start(self, order_manager, dish_manager, bill_manager):
+        while True:
+            orders = order_manager.get_orders()
+            clr_scr()
+            print_tables(self.table_list)
+            choice = input('\nChoice (1-9, 0): ').strip()
+            if choice.isdigit() and int(choice) in range(1, 10):    # select table
+                table = self.table_list[int(choice) - 1]
+                if str(table) == '0':           # if table is empty, start ordering for this table
+                    o = order_manager.add_order(int(choice), dish_manager)
+                    if o != 0:  # if order is added, update table status
+                        table.update()
+                elif str(table) == '1':         # if table is occupied, choose to edit order or bill
+                    for o in orders:
+                        if o.get_table_id() == int(choice):
+                            o = order_manager.update_order(o, dish_manager, bill_manager)
+                            if o == -1:             # if bill exported, update table status to empty
+                                table.update()
+
+            elif choice == '0':
+                if len(orders) == 0:
+                    return False
+                return True
