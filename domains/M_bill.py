@@ -29,9 +29,9 @@ class Bill_Manager:
         while True:
             # self.clear_bills()    # only used for debugging
             clr_scr()
-            print('\n--------------------------------------- Admin / Bills ----------------------------------------\n')
+            print('\n------------------- Admin / Bills --------------------\n')
             self.list_bills()
-            print(f'\n----------------------------------------------------------------------------------------------\n')
+            print(f'\n------------------------------------------------------\n')
             if len(self.__bills) == 0:
                 print('0. <- Back')
                 choice = input('\nChoice (0): ').strip()
@@ -43,7 +43,7 @@ class Bill_Manager:
                 return
             elif choice.isdigit() and int(choice) <= len(self.__bills):
                 clr_scr()
-                print(f'''\n--------------------------------------- Admin / Bills ----------------------------------------\n
+                print(f'''\n------------------- Admin / Bills --------------------\n
                         \r     ID\t\tTime\t\t\t   Total (VND)
                         \r-> {self.__bills[int(choice) - 1]}''')
                 self.__bills[int(choice) - 1].details()

@@ -3,7 +3,7 @@ from domains.Order import Order
 from input import write_bill, clr_scr
 
 def print_cart(table, cart):
-    print(f'''\n---------- Ordering for table {table} ----------\n
+    print(f'''\n---------- Ordering for Table {table} ----------\n
             \rCart:''')
     if len(cart) == 0:
         print('     - empty')
@@ -51,7 +51,7 @@ def order_modify(dish, cart, table_id):
             chosen_item = list(cart.keys())[int(choice)-1]  # get the dish(object) from the cart
             while True:
                 clr_scr()
-                print(f'''\n---------- Ordering for table {table_id} ----------\n
+                print(f'''\n---------- Ordering for Table {table_id} ----------\n
                         \rCart:
                         \r-> {chosen_item:25}  (+) {cart[chosen_item]} (-)
                         \r\n------------------------------------------\n
@@ -64,7 +64,7 @@ def order_modify(dish, cart, table_id):
                     if cart[chosen_item] == 0:
                         del cart[chosen_item]       # delete the dish from the cart
                         break
-        elif choice == 's':
+        elif choice == 's':             # submit the order
             if len(cart) == 0:
                 continue
             return cart
@@ -77,7 +77,6 @@ class Order_Manager:
         return self.__orders
 
     def add_order(self, table_id, dish_manager):
-        print(f'\nOrdering for table {table_id}')
         cart = {}   # {dish0: quantity, dish1: quantity, ...}
         dishes = dish_manager.get_dishes()
         if len(dishes) == 0: return 0
@@ -90,27 +89,28 @@ class Order_Manager:
     def update_order(self, order, dish_manager, bill_manager):
         cart = order.get_cart()     # load the previous cart
         dishes = dish_manager.get_dishes()
-        while True:
+        clr_scr()
+        print_cart(order.get_table_id(), cart)
+        print('\nDo you want to export bill now?')
+        confirm = input('Type \'y\' to confirm: ').strip().lower()
+        if confirm == 'y':  # export the bill
             clr_scr()
-            print_cart(order.get_table_id(), cart)
-            print('\nDo you want to export bill now?')
-            confirm = input('Type \'y\' to confirm: ').strip().lower()
-            if confirm == 'y':
-                clr_scr()
-                num_bills = len(bill_manager.get_bills())   # used to generate the bill id
-                prices = []     # list of prices of the dishes in the cart
-                for dish in dishes:
-                    if dish.get_name() in cart:
-                        prices.append(dish.get_price())
-                bill = Bill(num_bills, order.get_table_id(), cart, prices)
-                bill_manager.add_bill(bill)
-                bill.details()
-                write_bill(bill_manager.get_bills())
-                input('\nBill exported. Press Enter to continue...')
-                self.__orders.remove(order)
-                return -1
+            num_bills = len(bill_manager.get_bills())   # used to generate the bill id
+            prices = []     # list of prices of the dishes in the cart
+            for dish in dishes:
+                if dish.get_name() in cart:
+                    prices.append(dish.get_price())
+            bill = Bill(num_bills, order.get_table_id(), cart, prices)
+            print(f'\n        >>>   Bill created   <<<')
+            bill_manager.add_bill(bill)
+            bill.details()
+            write_bill(bill_manager.get_bills())
+            input('\nPress Enter to continue...')
+            self.__orders.remove(order)
+            return -1
 
-            cart = order_modify(dishes, cart, order.get_table_id())
-            if cart == 0: return order
-            order.set_cart(cart)
-            return order
+        tem_cart = cart.copy()
+        tem_cart = order_modify(dishes, tem_cart, order.get_table_id())
+        if tem_cart == 0: return order
+        order.set_cart(tem_cart)
+        return order
