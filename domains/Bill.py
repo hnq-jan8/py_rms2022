@@ -31,7 +31,7 @@ class Bill:
         return self.__date
 
     def __str__(self):
-        return f'{self.__id:4}\t\t{self.__date:%d/%m/%Y}\t\t{self.__total_price:10}'
+        return f'{self.__id:4}\t\t{self.__date:%d/%m/%Y}\t{self.__total_price:10}'
 
     def details(self):
         bill = f'''\n----------------- Bill -----------------\n
