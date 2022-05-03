@@ -38,11 +38,11 @@ class Dish_Manager:
     def edit_dish(self, dish):
         while True:
             clr_scr()
-            print('\n-------- Admin / D_Manager / Edit ---------\n')
-            print(f'''   Name\t\t\t\tPrice (VND)
-                    \r-> {dish}\n
-                    \r-------------------------------------------\n
-                    \r       1. Name     |     2. Price
+            print('\n---------- Admin / D_Manager / Edit -----------\n')
+            print(f'''      Name\t\t\t   Price (VND)
+                    \r  ->  {dish}\n
+                    \r-----------------------------------------------\n
+                    \r          1. Name     |     2. Price
                     \r\n0. <- Back''')
             choice = input('\nChoice (120): ').strip()
             if choice == '0':
@@ -75,11 +75,11 @@ class Dish_Manager:
     def select_dish(self, dish):
         while True:
             clr_scr()
-            print(f'''\n--------- Admin / Dishes Manager ----------\n
-                    \r   Name\t\t\t\tPrice (VND)
-                    \r-> {dish}\n
-                    \r-------------------------------------------\n
-                    \r       1. Edit     |     2. Delete
+            print(f'''\n----------- Admin / Dishes Manager ------------\n
+                    \r      Name\t\t\t   Price (VND)
+                    \r  ->  {dish}\n
+                    \r-----------------------------------------------\n
+                    \r          1. Edit     |     2. Delete
                     \r\n0. <- Back''')
             choice = input('\nChoice (120): ').strip()
             if choice == '0':
@@ -96,19 +96,19 @@ class Dish_Manager:
         if len(self.__dishes) == 0:
             print('(!) No dish')
         else:
-            print('   Name\t\t\t\tPrice (VND)')
+            print('      Name\t\t\t   Price (VND)')
             for i, dish in enumerate(self.__dishes):
-                print(str(i+1) + '.', dish)
+                print(f'{i+1:4}. {dish}')
 
     def start(self):
         self.refresh_name()    # Solve the problem of the name conflict
         while True:
             write_data('dishes', self.__dishes, self.names)
             clr_scr()
-            print('\n--------- Admin / Dishes Manager ----------\n')
+            print('\n----------- Admin / Dishes Manager ------------\n')
             self.list_dishes()
-            print(f'''\n-------------------------------------------
-                    \r\na.              | ADD |
+            print(f'''\n-----------------------------------------------
+                    \r\na.                 | ADD |
                     \r\n0. <- Back''')
             if len(self.__dishes) == 0:
                 choice = input('\nChoice (a, 0): ').strip().lower()

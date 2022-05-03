@@ -44,7 +44,7 @@ class Employee_Manager:
 
     def add_employee(self):
         clr_scr()
-        print('''\n---------------------------------- Admin / Employee Manager ----------------------------------\n
+        print('''\n-------------------------------------- Admin / Employee Manager --------------------------------------\n
                 \rAdding an employee''')
         fst, lst = input_name_employee()
         id = input('. Enter ID: ').strip()
@@ -60,12 +60,12 @@ class Employee_Manager:
     def edit_employee(self, employee):
         while True:
             clr_scr()
-            print('\n---------------------------------- Admin / E_Manager / Edit ----------------------------------\n')
-            print(f'''   Name\t\t\t     ID\t\t     Address\t     Role\t\t Salary  Shift
-                    \r-> {employee}\n
-                    \r----------------------------------------------------------------------------------------------\n
-                    \r                      1. Name      |       2. ID       |       3. Address\n
-                    \r                                 4. Role      |       5. Shift
+            print('\n-------------------------------------- Admin / E_Manager / Edit --------------------------------------\n')
+            print(f'''      Name\t\t\tID\t\tAddress\t\tRole\t\t    Salary  Shift
+                    \r  ->  {employee}\n
+                    \r------------------------------------------------------------------------------------------------------\n
+                    \r                         1. Name      |       2. ID       |       3. Address\n
+                    \r                                    4. Role      |       5. Shift
                     \r\n0. <- Back''')
             choice = input('\nChoice (123450): ').strip()
             if choice == '0':
@@ -103,11 +103,11 @@ class Employee_Manager:
     def select_employee(self, employee):
         while True:
             clr_scr()
-            print(f'''\n---------------------------------- Admin / Employee Manager ----------------------------------\n
-                    \r   Name\t\t\t     ID\t\t     Address\t     Role\t\t Salary  Shift
-                    \r-> {employee}\n
-                    \r----------------------------------------------------------------------------------------------\n
-                    \r                                1. Edit       |       2. Delete
+            print(f'''\n-------------------------------------- Admin / Employee Manager --------------------------------------\n
+                    \r      Name\t\t\tID\t\tAddress\t\tRole\t\t    Salary  Shift
+                    \r  ->  {employee}\n
+                    \r------------------------------------------------------------------------------------------------------\n
+                    \r                                   1. Edit       |       2. Delete
                     \r\n0. <- Back''')
             choice = input('\nChoice (120): ').strip()
             if choice == '0':
@@ -124,9 +124,9 @@ class Employee_Manager:
         if len(self.__employees) == 0:
             print('(!) No employee')
         else:
-            print('   Name\t\t\t     ID\t\t     Address\t     Role\t\t Salary  Shift')
+            print(f'      Name\t\t\tID\t\tAddress\t\tRole\t\t    Salary  Shift')
             for i, employee in enumerate(self.__employees):
-                print(str(i+1) + '.', employee)
+                print(f'{i+1:4}. {employee}')
 
     def list_by_shift(self):
         shift = self.choose_shift()
@@ -140,10 +140,10 @@ class Employee_Manager:
         while True:
             write_data('employees', self.__employees, self.ids)
             clr_scr()
-            print('\n---------------------------------- Admin / Employee Manager ----------------------------------\n')
+            print('\n-------------------------------------- Admin / Employee Manager --------------------------------------\n')
             self.list_employees()
-            print(f'''\n----------------------------------------------------------------------------------------------
-                    \r\na.                                         | ADD |
+            print(f'''\n------------------------------------------------------------------------------------------------------
+                    \r\na.                                            | ADD |
                     \r\n0. <- Back''')
             if len(self.__employees) == 0:
                 choice = input('\nChoice (a, 0): ').strip().lower()

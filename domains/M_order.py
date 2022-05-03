@@ -9,16 +9,16 @@ def print_cart(table, cart):
         print('     - empty')
     else:
         for i, (d, q) in enumerate(cart.items()):
-            print(f'{i+1}. {d:25}\tx {q}')  # print the cart including name, price and quantity
+            print(f'{i+1:4}. {d:25}\t x {q}')  # print the cart including name, price and quantity
     print('\n------------------------------------------')
 
 def print_menu(dish_list, table):
     print(f'''\n---------- Ordering for Table {table} ----------\n
-            \r               ** Menu **\n
-            \r   Name\t\t\t\tPrice (VND)''')
+            \r                  ** Menu **\n
+            \r      Name\t\t\t   Price (VND)''')
     for i, d in enumerate(dish_list):
-        print(str(i+1) + '.', d)    # print the menu
-    print('\n                ** ** **\n')
+        print(f'{i+1:4}. {d}')    # print the menu
+    print('\n                   ** ** **\n')
 
 def order_modify(dish, cart, table_id):
     while True:    # while there are dishes in the menu
@@ -53,7 +53,7 @@ def order_modify(dish, cart, table_id):
                 clr_scr()
                 print(f'''\n---------- Ordering for Table {table_id} ----------\n
                         \rCart:
-                        \r-> {chosen_item:25}  (+) {cart[chosen_item]} (-)
+                        \r  ->  {chosen_item:25}(+) {cart[chosen_item]} (-)
                         \r\n------------------------------------------\n
                         \r0. <- Back''')
                 choice = input(f'''\nChoice (+, -, 0): ''').strip()

@@ -18,9 +18,9 @@ class Bill_Manager:
         if len(self.__bills) == 0:
             print('(!) No bill')
         else:
-            print('     ID\t\tTime\t\t   Total (VND)')     # caption
+            print('        ID\t\tTime\t\t   Total (VND)')     # caption
             for i, bill in enumerate(self.__bills):
-                print(f'{i + 1}. {bill}')
+                print(f'{i+1:4}. {bill}')
 
     # def clear_bills(self):        # clear all bills
     #     self.__bills = []         # only used for debugging
@@ -29,9 +29,9 @@ class Bill_Manager:
         while True:
             # self.clear_bills()    # only used for debugging
             clr_scr()
-            print('\n-------------- Admin / Bills ---------------\n')
+            print('\n-------------------- Admin / Bills ---------------------\n')
             self.list_bills()
-            print(f'\n--------------------------------------------\n')
+            print(f'\n--------------------------------------------------------\n')
             if len(self.__bills) == 0:
                 print('0. <- Back')
                 choice = input('\nChoice (0): ').strip()
@@ -43,8 +43,8 @@ class Bill_Manager:
                 return
             elif choice.isdigit() and int(choice) <= len(self.__bills):
                 clr_scr()
-                print(f'''\n-------------- Admin / Bills ---------------\n
-                        \r     ID\t\tTime\t\t   Total (VND)
-                        \r-> {self.__bills[int(choice) - 1]}''')
+                print(f'''\n-------------------- Admin / Bills ---------------------\n
+                        \r        ID\t\tTime\t\t   Total (VND)
+                        \r  ->  {self.__bills[int(choice) - 1]}''')
                 self.__bills[int(choice) - 1].details()
                 input('\nPress Enter to continue...')
