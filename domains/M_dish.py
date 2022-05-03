@@ -31,7 +31,7 @@ class Dish_Manager:
         price = input('. Enter price: ').strip()
         while not price.isdigit() or int(price) < 1:
             price = input('''(!) Invalid price
-                            \rTry again: ''').strip()
+                            \r    Try again: ''').strip()
         price = int(price)
         self.__dishes.append(Dish(name, price))
 
@@ -56,8 +56,7 @@ class Dish_Manager:
                 price = input('. Enter price: ').strip()
                 try:
                     while not price.isdigit() or int(price) < 1:
-                        price = input('''(!) Invalid price
-                                        \rTry again: ''').strip()
+                        price = input('(!) Invalid price\n    Try again: ').strip()
                     price = int(price)
                 except ValueError:
                     print('(!) Invalid input')
@@ -65,7 +64,7 @@ class Dish_Manager:
 
     def delete_dish(self, dish):
         confirm = input(f'''\n(!) '{dish.get_name()}' will be removed.
-                        \rType 'y' to confirm: ''').strip()
+                        \r    Type 'y' to confirm: ''').strip()
         if confirm == 'y':
             self.names.remove(dish.get_name())
             self.__dishes.remove(dish)

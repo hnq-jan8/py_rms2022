@@ -31,7 +31,7 @@ class Employee_Manager:
                         \r      4. Receptionist   5. Security Guard
                         \r  Choice (12345): ''').strip()
         while role not in self.roles.keys():
-            role = input('(!) Bad choice\n  Try again (12345): ').strip()
+            role = input('(!) Bad choice\n    Try again (12345): ').strip()
         return self.roles[role]          # Convert from key (12345) to its value
 
     def choose_shift(self):
@@ -39,7 +39,7 @@ class Employee_Manager:
                         \r     1. Morning   2. Afternoon   3. Evening
                         \r  Choice (123): ''').strip()
         while shift not in self.shifts.keys():
-            shift = input('(!) Bad choice\n  Try again (123): ').strip()
+            shift = input('(!) Bad choice\n    Try again (123): ').strip()
         return self.shifts[shift]       # Convert from key (123) to its value
 
     def add_employee(self):
@@ -49,7 +49,7 @@ class Employee_Manager:
         fst, lst = input_name_employee()
         id = input('. Enter ID: ').strip()
         while id in self.ids:
-            id = input('(!) This ID is already taken\n Try again: ').strip()
+            id = input('(!) This ID is already taken\n    Try again: ').strip()
         self.ids.append(id)
         adr = input('. Enter address: ').strip()
         r = self.choose_role()
@@ -77,7 +77,7 @@ class Employee_Manager:
                 self.ids.remove(employee.get_id())
                 id = input('. Enter ID: ').strip()
                 while id in self.ids:
-                    id = input('(!) This ID is already taken\n Try again: ').strip()
+                    id = input('(!) This ID is already taken\n    Try again: ').strip()
                 employee.set_id(id)
                 self.ids.append(id)
             elif choice == '3':
@@ -92,8 +92,7 @@ class Employee_Manager:
                 employee.set_shift(shift)
 
     def delete_employee(self, employee):
-        confirm = input(f'''\n(!) '{employee.get_name()}' will be removed.
-                        \rType 'y' to confirm: ''').strip()
+        confirm = input(f'\n(!) \'{employee.get_name()}\' will be removed.\n    Type \'y\' to confirm: ').strip()
         if confirm == 'y':
             self.ids.remove(employee.get_id())
             self.__employees.remove(employee)

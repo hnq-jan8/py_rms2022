@@ -22,10 +22,10 @@ def input_name_dish(used_name):     # used for dish, name simp_checking
     while name in used_name or name == '':
         if name == '':
             name = input('''(!) Invalid name
-                        \rTry again: ''').strip()
+                        \r    Try again: ''').strip()
         else:
             name = input(f'''(!) There is a \'{name}\' already
-                        \r Try again: ''').strip()
+                        \r    Try again: ''').strip()
     return name
 
 def print_admin_action():
