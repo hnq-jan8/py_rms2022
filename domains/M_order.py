@@ -1,5 +1,5 @@
-from domains.Table import *
-from domains.M_bill import *
+from domains.Table import Table
+from domains.Bill import Bill
 from domains.Order import Order
 from input import write_bill, print_tables, clr_scr
 
@@ -100,6 +100,7 @@ class Order_Manager:
         print_cart(order.get_table_id(), cart)
         print('\nDo you want to export bill now?')
         confirm = input('Type \'y\' to confirm: ').strip().lower()
+        
         if confirm == 'y':  # export the bill
             clr_scr()
             num_bills = len(bill_manager.get_bills())   # used to generate the bill id
@@ -116,10 +117,14 @@ class Order_Manager:
             self.__orders.remove(order)
             return -1
 
-        tem_cart = cart.copy()
-        tem_cart = order_modify(dishes, tem_cart, order.get_table_id())
-        if tem_cart == 0: return order
-        order.set_cart(tem_cart)
+        new_cart = {}       # if not export the bill, add a new order
+        new_cart = order_modify(dishes, new_cart, order.get_table_id())  # add a new order
+        if new_cart == 0: return order
+        for d in new_cart:  # update the cart by adding items from new order
+            if d in cart:
+                cart[d] += new_cart[d]
+            else:
+                cart[d] = new_cart[d]
         return order
 
     def start(self, order_manager, dish_manager, bill_manager):

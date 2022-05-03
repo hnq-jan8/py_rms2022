@@ -3,6 +3,7 @@ from input import compress_data, decompress_data, print_admin_action, clean_up
 from domains.M_order import *
 from domains.M_dish import *
 from domains.M_employee import *
+from domains.M_bill import *
 
 d_manager = Dish_Manager()
 e_manager = Employee_Manager()
@@ -13,6 +14,7 @@ if __name__ == '__main__':
     open(f'employees.txt', 'wb')        # to solve problem when program is closed without any employee added
     open(f'dishes.txt', 'wb')           # used when program is closed without any employee added    (rarely happens)
     open(f'bills.txt', 'wb')            # used when program is closed without any bills added       (rarely happens)
+    
     if os.path.exists('res_data.zip'):
         try:
             decompress_data()
@@ -31,7 +33,8 @@ if __name__ == '__main__':
                 compress_data()
                 print('Data saved.')
                 if is_unfinished == True:
-                    confirm = input('You have unfinished order(s). Please enter \'quit\' to confirm exit: ').strip().lower()
+                    confirm = input('''\nYou have pending order(s).
+                                    \rPlease enter \'quit\' to confirm exit: ''').strip().lower()
                     if confirm == 'quit':
                         clean_up()
                         exit()

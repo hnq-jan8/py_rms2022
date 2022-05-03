@@ -1,5 +1,4 @@
 from input import read_bill, clr_scr
-from domains.Bill import Bill
 
 class Bill_Manager:
     def __init__(self):
