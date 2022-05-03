@@ -36,7 +36,7 @@ class Bill_Manager:
                 print('0. <- Back')
                 choice = input('\nChoice (0): ').strip()
             else:
-                print(f'''Select a bill to view more details
+                print(f'''Select a bill for more details
                         \r\n0. <- Back''')
                 choice = input(f'\nChoice (1-{len(self.__bills)}, 0): ').strip()
             if choice == '0':
