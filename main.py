@@ -32,7 +32,7 @@ if __name__ == '__main__':
                 print('Data saved.')
                 if is_unfinished == True:
                     confirm = input('You have unfinished order(s). Please enter \'quit\' to confirm exit: ').strip().lower()
-                    if confirm == 'exit':
+                    if confirm == 'quit':
                         clean_up()
                         exit()
                     else: break
