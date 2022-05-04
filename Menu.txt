@@ -1,0 +1,8 @@
+Pho nam:40000
+Pho tai:50000
+Pho bap:50000
+Com rang bo:100000
+Quay:10000
+Trung tran:10000
+Coca:15000
+Nhan Tran:15000
