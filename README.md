@@ -1,7 +1,7 @@
 Group project for Advanced Python Programming
+--
+Topic: Restaurant Management System
 ====================
-**Topic**: Restaurant Information Management System
-=====================
 **Menbers**:
 *   Phạm Đức Anh        BI11-021
 *   Nguyễn Vũ Cường     BI11-048
